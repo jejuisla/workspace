@@ -15,6 +15,15 @@ public class Porsche extends Car{
 		this.openTheDoor = openTheDoor;
 	}
 
+	
+	public boolean isOpenTheDoor() {
+		return openTheDoor;
+	}
+
+	public void setOpenTheDoor(boolean openTheDoor) {
+		this.openTheDoor = openTheDoor;
+	}
+
 	// Car의 toString() 오버라이딩
 	@Override
 	public String toString() {
@@ -22,7 +31,10 @@ public class Porsche extends Car{
 	}
 
 	
-
+	@Override
+	public void bindingTest() {
+		System.out.println("Porsche 자료형입니다.");
+	}
 	
 
 	
