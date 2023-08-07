@@ -65,5 +65,8 @@ public class CarRun {
 		//   다시 자식 객체를 온전히 참조할 수 있게 만드는 것
 		
 		System.out.println(((Spark)carArr[2]).getDiscountRate());
+		
+		
+		// 집에서 복습함
 	}
 }
