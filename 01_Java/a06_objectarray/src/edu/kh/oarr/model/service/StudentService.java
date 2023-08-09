@@ -123,7 +123,7 @@ public class StudentService {
 			if(s == null) {
 				break;
 			}
-			if(s.getName().equals(name)) {
+			if(s.getName().equals(name)) { // 기본 자료형일 경우 == / !== 사용 
 				//s.getName() 과 name의 값이 같을 때
 				count++; // count 1 증가
 			}
