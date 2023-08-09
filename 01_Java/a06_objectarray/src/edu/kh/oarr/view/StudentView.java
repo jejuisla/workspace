@@ -14,7 +14,7 @@ public class StudentView {
 		
 		int input = 0; // 메뉴 번호 입력
 		
-		do {
+		do {// 제한이 없는 반복문 사용 
 			System.out.println("\n----- 학생 관리 프로그램 -----");
 			System.out.println("1. 학생 추가");
 			System.out.println("2. 학생 전체 조회");
@@ -78,11 +78,11 @@ public class StudentView {
 	}
 	
 	/** 학생 전체 조회*/
-	private void selectAll() {
+	private void selectAll() { // case 1번 
 		System.out.println("\n----- 학생 전체 조회 -----");
 		
 		// StudentService에서 학생 배열(studentArr)을 반환 받아 오기
-		Student[] arr = service.selectAll();
+		Student[] arr = service.selectAll(); // arr -> Student[]타입 객체 참조 
 		// arr : 학생 객체 배열 참조
 		// arr[0] : 학생 객체 배열 중 0번 인덱스에 있는 참조 변수
 		//			-> 학생 객체 하나를 참조
@@ -101,13 +101,13 @@ public class StudentView {
 	
 	
 	/** 학생 1명 정보 조회(인덱스)*/
-	private void selectIndex() {
+	private void selectIndex() { // case 2번 
 		System.out.println("\n----- 학생 1명 정보 조회 -----");
 		
 		System.out.print("조회할 학생의 인덱스 번호를 입력하세요 : ");
 		int index = sc.nextInt();
 		
-		// StudentService로 index를 전달하여
+		// StudentService(service)로 index를 전달하여
 		// 해당하는 index에 학생 개체가 있으면 그 객체의 주소를 반환
 		// 그런데 index에 학생이 없거나 범위가 초과되면 null 반환
 		Student s = service.selectIndex(index);
