@@ -131,4 +131,26 @@ public class loop복습 {
 			}
 		}
 	}
+	
+	public void ex8() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("첫번째 : ");
+		int input1 = sc.nextInt();
+		
+		System.out.println("두번째 : ");
+		int input2 = sc.nextInt();
+		
+		if(input1>=1 && input2>=1) {
+			if(input1 > input2) {
+				int temp = input1;
+				input1 = input2;
+				input2 = temp;
+			}
+			for(int i=input1; i<=input2; i++) {
+				System.out.print(i + " ");
+			}
+		}
+	}
+	
 }
