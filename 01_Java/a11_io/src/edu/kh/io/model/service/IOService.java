@@ -78,7 +78,7 @@ public class IOService {
 	public void charOutput() { 
 		
 		// 프로그램 -> 파일에 씀
-		FileWriter fw = null;
+		FileWriter fw = null; // fw -> 지역변수 / { } 안에 작성하면 { }안에서만 해당됨
 		try {
 			fw = new FileWriter("char/charTest.txt");
 			// char 폴더의 charTest.txt가 있으면 문자 출력 스트림 연결
@@ -115,7 +115,7 @@ public class IOService {
 							// byte를 다루기 어려워서 int로 저장
 			
 			while(true) {
-				value = fis.read(); // 1byte를 읽어와 int로 저장
+				value = fis.read(); // 1byte를 읽어와 int로 저장(read가 int형으로 가져옴)
 									// 읽어올 내용이 없으면 -1 반환
 				if(value == -1) { // 다 읽었으면
 					break;
