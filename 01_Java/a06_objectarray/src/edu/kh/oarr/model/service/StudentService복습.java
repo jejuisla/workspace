@@ -42,5 +42,47 @@ public class StudentService복습 {
 		return studentArr;
 	}
 
+	public Student복습 selectIndex(int input) {
+		
+		if( input<0 || input>=studentArr.length 
+				|| studentArr[input] == null) {
+			return null;
+		}
+		return studentArr[input];
+	}
+
+	public Student복습[] selectName(String name) {
+		
+		int count = 0;
+		for( Student복습 s : studentArr) {
+			
+			if(s==null) break;
+			if(s.getName().equals(name)) count++;
+		}
+		if(count==0) return null;
+		
+		Student복습[] arr = new Student복습[count];
+		
+		
+		for( Student복습 s : studentArr) {
+				
+			int index = 0;
+			if(s==null) break;
+			if(s.getName().equals(name)) {
+				studentArr[index] = s;
+				index++;
+			}
+		}
+		return arr;
+	
+	}
+
+
+	public void updateStudent(Student복습 s, int kor, int eng, int math) {
+		s.setKor(kor);
+		s.setEng(eng);
+		s.setMath(math);
+	}
+
 
 }
