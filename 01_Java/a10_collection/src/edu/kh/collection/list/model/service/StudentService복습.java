@@ -17,4 +17,16 @@ public class StudentService복습 {
 	
 	
 	
+	public List<Student> selectGender(char gender){
+		
+		List<Student> searchList = new ArrayList<Student>();
+		
+		for(Student s : studentList) {
+			if(s.getGender() == gender) {
+				searchList.add(s);
+			}
+		}
+		return searchList;
+	}
+	
 	}

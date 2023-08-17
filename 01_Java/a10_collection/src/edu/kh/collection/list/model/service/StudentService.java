@@ -109,6 +109,10 @@ public class StudentService {
 				searchList.add(s);
 			}
 		}
+		
+//		 for(int i=0; i<studentList.size(); i++){
+//				if(studentList.get(i).getGender() == gender) searchList.add(studentList.get(i));
+//			}
 		return searchList; // 검색 결과가 저장된 List 반환
 	}
 
