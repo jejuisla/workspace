@@ -1,6 +1,7 @@
 package edu.kh.network.ex1.server;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -13,7 +14,7 @@ import java.util.Date;
 public class Server복습 {
 
 	public void start() {
-		int port = 8000;
+		int port = 5000;
 		
 		ServerSocket serverSocket = null;
 		Socket clientSocket = null;
@@ -23,46 +24,41 @@ public class Server복습 {
 		
 		BufferedReader br = null;
 		PrintWriter pw = null;
+		
+		// 소켓, 스트림 참조 변수를 try, finally 모두 사용할 수 있도록 try구문 밖에 작성
 		try {
 			serverSocket = new ServerSocket(port);
-			
 			clientSocket = serverSocket.accept();
 			
-			is = clientSocket.getInputStream(); // 클라이언트 -> 서버
-			os = clientSocket.getOutputStream(); // 서버 -> 클라이언트
+			is = clientSocket.getInputStream();
+			os = clientSocket.getOutputStream();
 			
 			br = new BufferedReader(new InputStreamReader(is));
 			pw = new PrintWriter(os);
 			
-			// 서버 -> 클라이언트 메세지 전달
-			Date now = new Date(); 
+			Date now = new Date();
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			
-			String message = sdf.format(now) + "서버 접속 성공";
-			// 전달 = 출력 -> PrintWritter -> pw 사용
-			pw.print(message);
-			pw.flush(); // 밀어내는 코드 , 미작성 시 클라이언트 쪽으로 출력되지않음
+			String Message = sdf.format(now);
+			// pw = printWriter -> 서버에서 클라이언트로 출력
+			pw.println(Message);
+			pw.flush();
 			
-			// 클라이언트 -> 서버 메세지 받기
-			String message2 = br.readLine(); // 클라이언트로 부터 메세지 받아와야 하니깐
-											// 입력 보조 스트림인 br을 사용
-			String clientIP = clientSocket.getInetAddress().getHostAddress();
+			// br = bufferedReader -> 클라이언트에서 서버로 입력
+			String ClientMessage = br.readLine();
 			
-		
-		} catch (Exception e) {
+			System.out.println(ClientMessage);
+		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			// 소켓, 스트림 생성 역순으로 close() 구문 작성
 			try {
 				if(br != null) br.close();
 				if(pw != null) pw.close();
-				// is,os.close() 는 보조 스트림 close()작성 시 자동 추가
 				
-				if(clientSocket != null) clientSocket.close();
 				if(serverSocket != null) serverSocket.close();
-				
-			} catch (Exception e) {
+				if(clientSocket != null) clientSocket.close();
+			}catch(IOException e) {
 				e.printStackTrace();
 			}
 		}
