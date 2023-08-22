@@ -147,7 +147,52 @@ WHERE EMAIL LIKE '___!_%' ESCAPE '!';
 -- 날짜(DATE) 타입은 비교가 가능
 
 
+/* ORDER BY 절
+ * 
+ * SELECT구문에서 제일 마지막에 해석됨
+ * 
+ * [작성법]
+ * SELECT 컬럼명
+ * FROM 테이블명
+ * WHERE 조건식
+ * ORDER BY 컬럼명 | 별칭 | 컬럼 순서 [오름/내림 차순]
+ * */
+
+SELECT EMP_NAME, SALARY
+FROM EMPLOYEE
+ORDER BY SALARY ASC;
+--> EMPLOYEE 테이블에서 급여 오름차순으로 이름, 급여 조회
+
+SELECT EMP_ID, EMP_NAME , SALARY
+FROM EMPLOYEE
+WHERE SALARY >= 3000000 AND SALARY < 6000000
+ORDER BY 2 DESC;
+--> EMPLOYEE 테이블에서 급여가 300만 이상 600만 이하인 사원의
+-- 사번, 이름, 급여를 이름 내림차순으로 조회
+--> 컬럼 순서로 내림차순 을 작성
+
+/* ORDER BY 절에는 계산식, 함수식도 작성 가능
+ * 별칭 도 가능
+ * */
 
 
+/* 정렬 시 컬럼값이 NULL인 행의 정렬 방법 지정 */
+-- 모든 사원의 이름, 전화번호 조회
+SELECT EMP_NAME , PHONE 
+FROM EMPLOYEE
+-- ORDER BY PHONE /*NULLS LAST*/; -- 오름차순 -> NULL은 마지막에 배치(기본값)
+--ORDER BY PHONE NULLS FIRST; -- 오름차순 -> NULL이 처음 부분에 배치
+--ORDER BY PHONE DESC NULLS FIRST; -- 내림차순 -> NULL 처음 부분에 배치(기본값)
+ORDER BY PHONE DESC NULLS LAST; -- 내림차순 -> NULL 마지막에 배치(기본값)
+
+
+
+/* 정렬 중첩 */
+-- 큰 분류를 먼저 정렬하고 작은 분류를 큰 분류가 흐트러지지 않는 선에서 정렬
+
+SELECT EMP_NAME , DEPT_CODE , JOB_CODE 
+FROM EMPLOYEE
+ORDER BY DEPT_CODE DESC , JOB_CODE , EMP_NAME ;
+--> EMPLOYEE 테이블에서 부서코드 내림차순, 직급코드 이름은 오름차순으로 조회
 
 
