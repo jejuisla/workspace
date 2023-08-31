@@ -25,7 +25,7 @@ SELECT * FROM DEPARTMENT2;
 -- 900, '장채현', '901123-2345678', 'jang_ch@kh.or.kr', '01012341234','D1', 'J7', 'S3', 4300000, 0.2, 200, SYSDATE, NULL, 'N'
    
 INSERT INTO EMPLOYEE2 
---VSLUSE(테이블 컬럼 순서대로 값을 작성)
+--VALUSE(테이블 컬럼 순서대로 값을 작성)
 VALUES(900, '장채현', '901123-2345678', 'jang_ch@kh.or.kr', '01012341234','D1', 'J7', 'S3', 4300000, 0.2, 200, SYSDATE, NULL, 'N');
 
 SELECT * FROM EMPLOYEE2
