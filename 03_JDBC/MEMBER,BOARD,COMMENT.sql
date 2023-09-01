@@ -1,0 +1,42 @@
+-- 시퀀스 생성
+CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE; -- 회원번호
+CREATE SEQUENCE SEQ_BOARD_NO NOCACHE; -- 게시글번호
+CREATE SEQUENCE SEQ_COMMENT_NO NOCACHE; -- 댓글번호
+
+-- MEMBER 테이블에 INSERT하기
+INSERT INTO MEMBER 
+VALUES(SEQ_MEMBER_NO.NEXTVAL,
+	'mem1@gmail.com',
+	'qwer123',
+	'1번회원',
+	'01012341234',
+	'서울시 중구',
+	DEFAULT,DEFAULT);
+
+COMMIT;
+
+-- 이메일, 비밀번호가 일치하는 회원의
+-- 닉네임, 전화번호, 주소 수정
+UPDATE MEMBER
+SET MEMBER_NICKNAME = '변경된 닉네임',
+	MEMBER_TEL = '01011112222',
+	MEMBER_ADDRESS = '경기도 수원시'
+WHERE MEMBER_EMAIL = 'mem1@gmail.com'
+AND MEMBER_PW = 'qwer123';
+
+ROLLBACK;
+
+DELETE FROM MEMBER
+WHERE MEMBER_EMAIL = 'mem1@gmail.com'
+AND MEMBER_PW = 'qwer1234';
+
+ROLLBACK;
+
+
+UPDATE MEMBER 
+SET MEMBER_PW = '입력받은 뉴 비번'
+WHERE MEMBER_EMAIL = 'mem1@gmail.com'
+AND MEMBER_PW = 'qwer123';
+
+
+SELECT 
