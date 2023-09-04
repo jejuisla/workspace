@@ -1,4 +1,4 @@
--- 1.
+-- 1번
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 CREATE USER example_kjm IDENTIFIED BY "qwer1234";
 GRANT CONNECT, RESOURCE TO example_kjm;
@@ -9,8 +9,8 @@ ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 CREATE USER example2_kjm IDENTIFIED BY "qwer1234";
 GRANT CONNECT, CREATE VIEW TO example2_kjm;
 
--- 2. 
+-- 2번 
 REVOKE CONNECT FROM example2_kjm;
 DROP USER example2_kjm CASCADE;
 
--- 3.
+

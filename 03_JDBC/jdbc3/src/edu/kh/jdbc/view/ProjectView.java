@@ -32,7 +32,7 @@ public class ProjectView {
 				System.out.println("4. 회원 탈퇴"); // MEMBER_DEL_FL = 'Y'
 				System.out.println("5. MEMBER 테이블 전체 조회");
 				System.out.println("6. 게시글 작성하기"); //BOARD 테이블에 INSERT하기
-				System.out.println("7. 로그인");
+				System.out.println("7. 게시글 목록 조회");
 				System.out.println("0. 종료");
 				
 				System.out.print("메뉴 선택 : ");
@@ -46,8 +46,7 @@ public class ProjectView {
 				case 4: updateDelfl(); break;
 				case 5: selectAllMember(); break;
 				case 6: insertBoard(); break;
-				case 7: login2(); break;
-				case 8: updateMember2(); break;
+//				case 7: selectBoardList(); break;
 				case 0: System.out.println("\n 프로그램 종료 \n");
 				default: System.out.println("\n 메뉴 번호만 입력해주세요 \n");
 				}
@@ -122,24 +121,7 @@ public class ProjectView {
 	   }
 	   
 	   
-	   private void login2() {
-		   System.out.println(" 로그인2 ");
-		   
-		   System.out.println("이메일 : ");
-		   String email = sc.next();
-		   System.out.println("비밀번호 : ");
-		   String pw = sc.next();
-		   
-		   Member mem = service.login2(email, pw);
-		   
-		   if(mem != null) {
-			   System.out.println("로그인 성공");
-			   loginMember = mem;
-		   } else {
-			   System.out.println("로그인 실패");
-		   }
-		   
-	   }
+
 	   
 	   /**
 	 * MEMBER 테이블 전체 조회
@@ -191,20 +173,6 @@ public class ProjectView {
 	}
 	
 	
-	private void updateMember2() { // 로그인된 회원의 닉네임, 전화번호 수정
-		// 로그인되어있는지 확인
-		if(loginMember == null) {// 로그인이 안되어있을 경우
-			System.out.println("로그인 후 이용해주세요");
-			return; // 반환 -> if문을 빠져나옴
-		}
-		System.out.print("수정할 닉네임: ");
-		String nickname = sc.next();
-		
-		System.out.print("수정할 전화번호(-제외): ");
-		String tel = sc.next();
-		
-		int result = service.updateMember2(nickname, tel, loginMember.getMemberNo());
-	}
 	
 	
 	/**
@@ -272,4 +240,7 @@ public class ProjectView {
 		else 		System.out.println("\n 게시글 등록 실패 \n");
 	}
 	
+	
+	
+
 }

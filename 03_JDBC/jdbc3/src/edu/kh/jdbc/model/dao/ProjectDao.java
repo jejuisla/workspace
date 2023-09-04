@@ -254,7 +254,7 @@ public class ProjectDao {
 	}
 
 	public int updateMember(Connection conn, String nickname, String tel, int memberNo) {
-		int result = 0;
+		int result = 0; // 
 		
 		String sql = "UPDATE MEMBER "
 				+ "SET MEMBER_NICKNAME = ?, "
@@ -334,56 +334,9 @@ public class ProjectDao {
 		return result;
 	}
 
-	public Member login3(Connection conn, String email, String pw) {
-		Member mem = null;
-		
-		String sql = "SELECT MEMBER_NO , MEMBER_NICKNAME , MEMBER_TEL , MEMBER_ADDRESS ,\r\n"
-				+ "		TO_CHAR(ENROLL_DATE,'YYYY\"년\" MM\"월\" DD\"일\" HH24:MI:SS') ENROLL_DATE \r\n"
-				+ "FROM MEMBER\r\n"
-				+ "WHERE MEMBER_EMAIL = ?\r\n"
-				+ "AND MEMBER_PW = ?\r\n"
-				+ "AND MEMBER_DEL_FL = 'N'";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-//			stmt = conn.createStatement();
-//			rs = stmt.executeQuery(sql);
-			// pstmt-> pstmt 생성할 때 sql참조
-			// stmt -> ResultSet을 생성할 때 sql참조
-			
-			pstmt.setString(1, email);
-			pstmt.setString(2, pw);
-			// DML -> executeQuery
-			// SELECT -> executeUpdate
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {// 결과가 1행만 나오니깐 if사용을 권고
-				// 조회 결과가 있을 경우 컬럼값을 모두 가져오기
-				int memeberNo = rs.getInt("MEMBER_NO");
-				String memberNickName = rs.getString("MEMBER_NICKNAME");
-				String memberTel = rs.getString("MEMBER_TEL");
-				String memberAddress = rs.getString("MEMBER_ADDRESS");
-				String enrollDate = rs.getString("ENROLL_DATE");
-				
-				mem = new Member();
-				
-				mem.setMemberNO(memeberNo);
-				mem.setMemberNickname(memberNickName);
-				mem.setMemberTel(memberTel);
-				mem.setMemberAddress(memberAddress);
-				mem.setEnrollDate(enrollDate);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(conn);
-		}
-		return mem;
-		// mem == null 로그인 실패
-		// mem != null 로그인 성공
-	}
+
+
+
 	
 	
 

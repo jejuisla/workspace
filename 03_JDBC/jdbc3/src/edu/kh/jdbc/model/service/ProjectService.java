@@ -125,24 +125,7 @@ public class ProjectService {
 		return result;
 	}
 
-	public Member login2(String email, String pw) {
-		Connection conn = getConnection();
-		
-		Member mem = dao.login3(conn, email, pw);
-		
-		close(conn);
-		
-		return mem;
-	}
 
-	public int updateMember2(String nickname, String tel, int memberNo) {
-		Connection conn = getConnection(); // JDBCTemplate 
-		
-		int result = dao.updateMember2(conn, nickname, tel, memberNo);
-		
-		if(result > 0) commit(conn);
-		else			rollback(conn);
-		return 0;
-	}
+
 	
 }
