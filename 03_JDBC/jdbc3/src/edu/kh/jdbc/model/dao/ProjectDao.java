@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.kh.jdbc.model.dto.Board;
 import edu.kh.jdbc.model.dto.Member;
 public class ProjectDao {
 	// JDBC 객체 참조 변수 선언
@@ -137,7 +138,8 @@ public class ProjectDao {
 		// member != null -> 로그인 성공
 		return member;
 	}
-
+	
+	
 	/** 로그인(Statement)
 	 * @param conn
 	 * @param email
@@ -333,6 +335,194 @@ public class ProjectDao {
 		}
 		return result;
 	}
+
+	/** 게시글 상세 조회
+	 * @param conn
+	 * @param boardNo
+	 * @return
+	 */
+	public Board selectBoard(Connection conn, int boardNo) {
+		// 결과 저장용 변수 선언
+		Board board = null;
+		
+        // 게시글 번호를 입력 받아 일치하는 게시글의
+        // 제목, 내용, 작성일, 조회수, 작성자번호, 작성자 닉네임 조회
+        // 단, 삭제되지 않은 게시글만 조회 가능(BOARD_DEL_FL = 'N')
+
+		String sql = "SELECT BOARD_TITLE, BOARD_CONTENT , TO_CHAR(B_CREATE_DATE, 'YYYY-MM-DD HH24:MI:SS') B_CREATE_DATE, READ_COUNT , MEMBER_NO , MEMBER_NICKNAME\r\n"
+				+ "FROM BOARD\r\n"
+				+ "JOIN MEMBER USING(MEMBER_NO)\r\n"
+				+ "WHERE BOARD_DEL_FL = 'N'\r\n"
+				+ "AND BOARD_NO = ?";
+		
+		try {
+			// pstmt 생성
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			// sql(SELECT) 수행 후 결과(ResultSet) 반환받기
+			rs = pstmt.executeQuery();
+			if(rs.next()) { // 조회 결과가 있을 경우
+				board = new Board();
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setBoardCreateDate(rs.getString("B_CREATE_DATE"));
+				board.setReadCount(rs.getInt("READ_COUNT"));
+				board.setMemberNo(rs.getInt("MEMBER_NO"));
+				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
+				board.setBoardNo(boardNo);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return board;
+	}
+
+	/** 조회수 증가
+	 * @param conn
+	 * @param boardNo
+	 * @return
+	 */
+	public int incrementReadCount(Connection conn, int boardNo) {
+		int result = 0;
+		
+		String sql = "UPDATE BOARD \r\n"
+				+ "SET READ_COUNT = READ_COUNT + 1\r\n"
+				+ "WHERE BOARD_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Board selectBoardList(Connection conn, String nick) {
+		Board board = null;
+		
+		String sql = "SELECT BOARD_NO , BOARD_TITLE , B_CREATE_DATE , READ_COUNT , MEMBER_NO , MEMBER_NICKNAME\r\n"
+				+ "FROM BOARD\r\n"
+				+ "JOIN MEMBER USING(MEMBER_NO)\r\n"
+				+ "WHERE BOARD_DEL_FL = 'N'\r\n"
+				+ "AND MEMBER_NICKNAME = ?\r\n"
+				+ "ORDER BY BOARD_NO DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, nick);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				board = new Board();
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardCreateDate(rs.getString("B_CREATE_DATE"));
+				board.setReadCount(rs.getInt("READ_COUNT"));
+				board.setMemberNo(rs.getInt("MEMBER_NO"));
+				board.setMemberNickname(nick);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return board;
+	}
+
+	public Board selectDeleteBoard(Connection conn, int boardNo, int memberNo) {
+		Board board = null;
+		
+//		String sql = "SELECT MEMBER_NO \r\n"
+//				+ "FROM BOARD\r\n"
+//				+ "WHERE BOARD_NO = ?";
+		
+		String sql = "SELECT COUNT(*) FROM BOARD\r\n"
+				+ "WHERE BOARD_NO = ?\r\n"
+				+ "AND MEMBER_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, memberNo);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				board = new Board();
+				board.setMemberNo(memberNo);
+				board.setBoardNo(boardNo);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return board;
+	}
+
+	public int deleteBoard(Connection conn, int boardNo) {
+		int result = 0;
+		
+		String sql = "UPDATE BOARD\r\n"
+				+ "SET BOARD_DEL_FL = 'Y'\r\n"
+				+ "WHERE BOARD_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateBoard(Connection conn, String boardTitle, String boardContent, int boardNo) {
+		int result = 0;
+		
+		String sql = "UPDATE BOARD\r\n"
+				+ "SET BOARD_TITLE = ?,\r\n"
+				+ "BOARD_CONTENT = ?\r\n"
+				+ "WHERE BOARD_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, boardTitle);
+			pstmt.setString(2, boardContent);
+			pstmt.setInt(3, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 
 
 

@@ -1,6 +1,7 @@
 package edu.kh.jdbc.model.service;
 
 import edu.kh.jdbc.model.dao.ProjectDao;
+import edu.kh.jdbc.model.dto.Board;
 import edu.kh.jdbc.model.dto.Member;
 
 // static 필드/메서드 호출 시 클래스명(JDBCTemplate) 생략
@@ -124,6 +125,90 @@ public class ProjectService {
 		
 		return result;
 	}
+
+	/** 게시글 상세 조회
+	 * @param boardNo
+	 * @return
+	 */
+	public Board selectBoard(int boardNo) {
+		Connection conn = getConnection();
+		
+		// 1) DAO - 게시글 상세 조회 메서드 호출
+		Board board = dao.selectBoard(conn, boardNo);
+		
+		// 2) 게시글 상세 조회 결과가 있을 경우 -> 조회수 증가(incrementReadCount(게시글 번호)) 수행
+		if(board != null) {
+			int result = dao.incrementReadCount(conn, boardNo);
+			
+			// 트랜젝션 제어
+			if(result > 0) {
+				commit(conn);
+				// DB와 데이터 동기화
+				// (DB에서만 조회수가 1증가하기 때문에
+				// 조회해둔 board에도 조회수 1을 증가시킨다)
+				board.setReadCount(board.getReadCount()+1);
+			}
+			else rollback(conn);
+		}
+		
+		close(conn);
+		
+		return board;
+	}
+
+	public Board selectBoardList(String nick) {
+		Connection conn = getConnection();
+		Board board = dao.selectBoardList(conn, nick);
+		
+		close(conn);
+		
+		return board;
+	}
+
+
+
+	/** 일치하는지 확인 메서드
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 */
+	public Board selectDeleteBoard(int boardNo, int memberNo) {
+		Connection conn = getConnection();
+		
+		
+		Board board = dao.selectDeleteBoard(conn, boardNo, memberNo);
+		
+		close(conn);
+		return board;
+	}
+
+	public int deleteBoard(int boardNo) {
+		Connection conn = getConnection();
+		
+		int result = dao.deleteBoard(conn, boardNo);
+		
+		if(result > 0) commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+
+	public int updateBoard(String boardTitle, String boardContent, int boardNo) {
+		Connection conn = getConnection();
+		
+		int result = dao.updateBoard(conn , boardTitle, boardContent, boardNo);
+		
+		if(result >0) commit(conn);
+		else		 rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+
+	
+
+	
 
 
 
