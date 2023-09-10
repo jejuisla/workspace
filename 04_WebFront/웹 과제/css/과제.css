@@ -1,0 +1,102 @@
+@font-face {
+  font-family: "LeeSeoyun";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: LeeSeoyun;
+}
+
+.c1 {
+  width: 50px;
+  height: 30px;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+#div-searchbox {
+  width: 200px;
+  height: 50px;
+}
+
+#searchbox {
+  width: 80%;
+  height: 20px;
+}
+#div-searchbtn {
+  width: 50px;
+  height: 50px;
+}
+/* #searchbox {
+  width: 80%;
+  float: left;
+} */
+#searchbtn {
+  width: 40px;
+  height: 30px;
+}
+.cls-sb {
+  float: left;
+}
+.cls-sbtn {
+  float: left;
+}
+
+#div1 {
+  height: 50px;
+}
+/* #id-img {
+  width: 50px;
+  height: 30px;
+} */
+.cls-img {
+  width: 50px;
+  height: 30px;
+}
+.main {
+  width: 100%;
+}
+
+#main-1 {
+  width: 70%;
+
+  background-color: lightcoral;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.main > #main-1-2 {
+  width: 30%;
+  height: 100%;
+  background-color: skyblue;
+}
+
+.cls-banner {
+  width: 55%;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.cls-main {
+  font-size: 40px;
+}
+
+.cls1-main {
+  float: left;
+}
+.cls2-main {
+  width: 30%;
+  background-color: greenyellow;
+}
+
+#img-sports1 {
+  width: 300px;
+  height: 150px;
+}
+
+#main2-btn {
+  width: 250px;
+  height: 80px;
+}
