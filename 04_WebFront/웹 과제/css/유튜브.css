@@ -1,6 +1,7 @@
 @font-face {
   font-family: "LeeSeoyun";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -54,7 +55,29 @@
 #btn {
   width: 50px;
   height: 40px;
+  cursor: pointer;
 }
 #div-login {
   margin: 10px 80px;
+}
+
+.row {
+  height: 25%;
+}
+.col-1 {
+  width: 25%;
+  float: left;
+  margin: 10px 10px;
+}
+.col-2 {
+  width: 25%;
+  float: left;
+  margin: 10px 10px;
+}
+.cls-a {
+  text-decoration: none;
+  color: black;
+}
+.cls-tfoot {
+  clear: both;
 }
