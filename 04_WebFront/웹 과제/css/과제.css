@@ -1,21 +1,26 @@
 @font-face {
   font-family: "LeeSeoyun";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 * {
   font-family: LeeSeoyun;
 }
-
+div {
+  box-sizing: border-box;
+}
 .c1 {
   width: 50px;
   height: 30px;
   border: 1px solid black;
   display: inline-block;
 }
-
+.cls-h {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 #div-searchbox {
   width: 200px;
   height: 50px;
@@ -37,11 +42,17 @@
   width: 40px;
   height: 30px;
 }
+.cls-title {
+  clear: both;
+}
 .cls-sb {
   float: left;
 }
 .cls-sbtn {
   float: left;
+}
+.cls-head {
+  clear: both;
 }
 
 #div1 {
@@ -57,11 +68,12 @@
 }
 .main {
   width: 100%;
+  height: 100%;
 }
 
 #main-1 {
   width: 70%;
-
+  height: 100%;
   background-color: lightcoral;
   border: 1px solid gray;
   border-radius: 10px;
@@ -86,8 +98,9 @@
 .cls1-main {
   float: left;
 }
-.cls2-main {
+#main-2 {
   width: 30%;
+  height: 100%;
   background-color: greenyellow;
 }
 
@@ -99,4 +112,8 @@
 #main2-btn {
   width: 250px;
   height: 80px;
+}
+
+.cls-foot {
+  clear: both;
 }
