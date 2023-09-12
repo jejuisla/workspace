@@ -1,18 +1,21 @@
 @font-face {
   font-family: "LeeSeoyun";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "HakgyoansimWoojuR";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2") format("woff2");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Dovemayo_gothic";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2") format("woff2");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -22,7 +25,7 @@
   box-sizing: border-box;
   font-family: LeeSeoyun;
 }
-div,
+/* div,
 main,
 header,
 footer,
@@ -31,8 +34,8 @@ article,
 nav,
 aside,
 form {
-  border: 1px solid black;
-}
+  border: 1px solid black; */
+/* } */
 
 body {
   display: flex;
@@ -57,6 +60,10 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+footer > p {
+  border-bottom: 1px solid #ddd;
 }
 
 header > section:nth-of-type(1) {
@@ -117,6 +124,7 @@ nav {
   height: 50px;
   position: sticky;
   top: 0;
+  background-color: white;
   z-index: 1000;
 }
 
@@ -139,8 +147,13 @@ nav a {
   display: block;
   border-radius: 5px;
   height: 100%;
+  margin: 0 5px;
 }
-
+nav a:hover {
+  background-color: red;
+  color: white;
+  height: 100%;
+}
 #nav-li-youtube {
   background-color: red;
   color: white;
@@ -192,4 +205,76 @@ nav a {
 
 .form-id {
   font-family: HakgyoansimWoojuR;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 150px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 10px;
+}
+.content-2 fieldset {
+  display: flex;
+  flex-basis: 60%;
+}
+#section-1 {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  border-right: 1px solid gray;
+}
+#section-1 > input {
+  border: none;
+  outline: none;
+  height: 50%;
+  padding: 5px;
+}
+#input-id {
+  border-bottom: 1px solid gray !important;
+}
+#section-2 {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+#section-2 > button {
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  width: 100%;
+}
+.content-2 label {
+  padding: 5px;
+}
+#input-cb {
+  margin: 5px;
+}
+.art-id-pw {
+  margin: 5px;
+  border: none;
+  padding: 0 5px;
+}
+.art-id-pw > a {
+  text-decoration: none;
+  color: black;
+}
+.art-id-pw span {
+  margin: 0 10px;
+}
+.nav-nickname {
+  font-family: HakgyoansimWoojuR;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 10px;
+}
+.nav-nickname > ul {
+  display: flex;
+  flex-direction: column;
+}
+.nav-nickname li {
+  flex-grow: 1;
 }
