@@ -19,7 +19,7 @@
   <h3>EL 특징 1: get이라는 단어를 사용하지 않음</h3>
   <pre>
     - 출력 용도의 언어이기 때문에 set이라는 개념이 존재하지 않음
-      -> 반댣하눈 get만 남는데 생략하여 사용
+      -> 반대되는 get만 남는데 생략하여 사용
   </pre>
   <ul>
     <li>JSP 표현식 : <%= request.getParameter("test") %></li>
