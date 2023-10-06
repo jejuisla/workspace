@@ -1,0 +1,60 @@
+:root {
+  font-size: 62.5%; /* 10px 기준, rem단위 사용 */
+  --error-color: red;
+  --normal-color: green;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+main {
+  width: 30rem; /* 1rem == 10px */
+  min-height: 30rem;
+}
+
+main h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+}
+.login-row {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.login-row > label {
+  width: 15%;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.login-row > input {
+  width: 85%;
+  font-size: 2rem;
+  padding: 0.3rem 0.5rem;
+}
+.login-row > button {
+  width: 100%;
+  font-size: 2rem;
+}
+.login-row:last-of-type {
+  justify-content: center;
+}
+.login-row a {
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
