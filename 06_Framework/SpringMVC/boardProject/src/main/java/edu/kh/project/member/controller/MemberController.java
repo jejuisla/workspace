@@ -4,18 +4,31 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.project.member.model.dto.Member;
+import edu.kh.project.member.model.service.MemberService;
+import edu.kh.project.member.model.service.MemberServiceImpl;
 
 @Controller // 요청,응답을 처리
 @RequestMapping("/member") // 공통 주소( /member 로 시작)
+@SessionAttributes({"loginMember"}) // Model 중 "loginMember"를 Session으로 이동
 public class MemberController {
+	
+	// 등록된 bean 중 MemberServiceImpl을 해당 필드에 의존성 주입
+	@Autowired
+	private MemberService service;
 	
 	// Spring에서 파라미터를 전달 받는 방법
 	//@RequestMapping(value="/login",method = RequestMethod.POST)
@@ -75,7 +88,7 @@ public class MemberController {
 	
 	// Spring에서 파라미터를 전달 받는 방법 3
 	// -> @ModelAttribute 어노테이션 이용
-	@PostMapping("/login")
+	//@PostMapping("/login")
 	public String login(/* @ModelAttribute */ Member member) {
 		/* @ModelAttribute
 		 * - DTO와 같이 사용하는 어노테이션
@@ -103,5 +116,76 @@ public class MemberController {
 		System.out.println(member.getMemberPw());
 		return null;
 	}
+	
+	// ********************************************************
+	/** 로그인 요청 처리
+	 * <p>
+	 * 	로그인 요청 처리(세션) + 아이디 저장(쿠키)
+	 * </p>
+	 * @param inputMember : 이메일, 비밀번호 저장 커맨드 객체
+	 * @param model : 데이터 전달용 객체
+	 * @return
+	 */
+	@PostMapping("login")
+	public String login( Member inputMember, Model model, RedirectAttributes ra) {
+		
+		// 로그인 서비스 호출
+		Member loginMember = service.login(inputMember);
+		// 로그인 성공 : Member 객체 반환
+		// 로그인 실패 : NULL 
+		
+		/* Spring에서 Session을 다루는 방법
+		 * 
+		 * [1] Model 객체 + @SessionAttributes
+		 * 
+		 */
+		
+		// 데이터 전달 객체에 속성 추가
+		// 기본 scope == request scope
+		model.addAttribute("loginMember", loginMember);
+		
+		// ----------------------------------------------
+		// 로그인 실패 시 특정 메세지를 *잠깐* session에 세팅하여 메인페이지에서 alert로 출력
+		// *잠깐* session에 세팅하는 이유
+		// 1) redirect 시 scope 이용이 불가능해서
+		// 2) session에 계속 있으면 계속 메세지가 출력되기 때문에
+		
+		/* RedirectAttributes */
+		// - 값 세팅 시 request scope
+		// - redirect 하는 중에는 session scope로 이동
+		// - redirect 완료 후 requeset scope로 돌아옴
+		
+		// [작성법]
+		// 1) RedirectAttributes를 메서드 매개변수에 추가
+		// 2) RedirectAttributes.addFlashAttribute("key", value)
+		
+		if(loginMember == null) { // 로그인 실패 시
+			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		}
+		
+		
+		// ----------------------------------------------
+		
+		
+		// redirect 시 기존 요청은(request scope) 삭제됨
+		
+		// Spring에서 redirect 하는 방법
+		// return "redirect:요청 주소";
+		return "redirect:/"; // 메인페이지 재요청(redirect)
+	}
+	
+	/** 로그아웃
+	 * @return
+	 */
+	@GetMapping("logout")
+	public String logout(SessionStatus status) {
+		// SessionStatus : @SessionAttributes를 이용해 Session scope에 등록된 값을 
+		//					정리(없앨 수 있는 객체)
+		status.setComplete();
+		// 세션 만료(제거)
+		
+		return "redirect:/";
+	}
+	
 	
 }
