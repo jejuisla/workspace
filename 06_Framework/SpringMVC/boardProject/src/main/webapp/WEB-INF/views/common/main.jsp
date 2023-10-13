@@ -62,13 +62,13 @@
                 <%-- loginMember가 존재할 때 --%>
                 <c:if test="${not empty loginMember}">
                     <article class="login-area">
-                        <a href="#">
+                        <a href="/myPage/profile">
                             <img src="/resources/images/user.png" id="memberProfile">
                         </a>
 
                         <div class="my-info">
                             <div>
-                                <a href="#" id="nickname">${loginMember.memberNickname}</a>
+                                <a href="/myPage/info" id="nickname">${loginMember.memberNickname}</a>
                                 <a href="/member/logout" id="logoutBtn">로그아웃</a>
                             </div>      
                             <p>${loginMember.memberEmail}</p>       
