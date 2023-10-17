@@ -35,5 +35,25 @@ public class MemberServiceImpl implements MemberService{
 		// 비밀번호가 일치하면 비밀번호 제거 후 return
 		loginMember.setMemberPw(null);
 		return loginMember;
-}
+	}
+	
+	@Override
+	public int signup(Member inputMember, String[] memberAddress) {
+		
+		// 주소가 입력되지 않은 경우
+		if(inputMember.getMemberAddress().equals(",,")) {
+			inputMember.setMemberAddress(null); // null로 변환
+		} else {
+			// 배열 -> 문자열로 합쳐서 inputMember에 추가
+			String address = String.join("^^^", memberAddress);
+			inputMember.setMemberAddress(address);
+		}
+		
+		// 비밀번호 암호화(DB에 암호화된 비밀번호 저장)
+		String encPw = bCrypt.encode(inputMember.getMemberPw()); // 암호화
+		inputMember.setMemberPw(encPw); // 암호화된 비밀번호 다시 set
+		
+		// Mapper 호출
+		return mapper.signup(inputMember);
+	}
 }
