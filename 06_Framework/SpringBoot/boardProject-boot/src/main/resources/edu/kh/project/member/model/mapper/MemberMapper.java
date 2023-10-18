@@ -37,4 +37,10 @@ public interface MemberMapper {
 	 * @return
 	 */
 	int signup(Member inputMember);
+
+	/** 빠른 로그인
+	 * @param memberEmail
+	 * @return loginMember
+	 */
+	Member login(String memberEmail);
 }
