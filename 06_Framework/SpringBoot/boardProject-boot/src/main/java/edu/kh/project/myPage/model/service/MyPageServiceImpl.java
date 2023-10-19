@@ -37,17 +37,17 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public int changePw(String currentPw, String newPw, int memberNo) {
 		// 로그인한 회원 비밀번호 조회
-		String encPw = mapper.selectMemberPw(memberNo);
+		String encPw = mapper.selectMemberPw(memberNo); 
 		
-		if(!bcrypt.matches(currentPw, encPw)) {
+		if(!bcrypt.matches(currentPw, encPw)) {  
 			return 0;
 		}
 		// 같으면 새 비밀번호 변경
 		// 마이바티스 코드의 파라미터는 1개만 가능
-		// 지금 newPw, currentPw 두개 필요
+		// 지금 newPw, currentPw 두개 필요 -> Map(Collection 사용)
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("newPw", newPw);
+		Map<String, Object> map = new HashMap<>(); // Map 생성 후 파라미터 집어넣기
+		map.put("newPw", bcrypt.encode(newPw)); // 회원가입 창에서 새 비밀번호 칸에 적은 비밀번호를 암호화
 		map.put("memberNo", memberNo);
 		
 		return mapper.changePw(map);

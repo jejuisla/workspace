@@ -53,7 +53,7 @@ public class MyPageController {
 	@PostMapping("info")
 	public String info(Member updateMember, String[] memberAddress, @SessionAttribute("loginMember") Member loginMember, RedirectAttributes ra) {
 		// 1) loginMember에서 회원 번호만 얻어와 updateMember에 세팅
-		updateMember.setMemberNo(loginMember.getMemberNo());
+		updateMember.setMemberNo(loginMember.getMemberNo()); 
 		
 		// 2) 회원정보 수정 서비스 호출
 		int result = service.info(updateMember, memberAddress);
@@ -76,6 +76,7 @@ public class MyPageController {
 		// - message = "회원 정보 수정 실패"
 		
 		ra.addFlashAttribute("message",message);
+
 		return "redirect:info";
 	}
 	
@@ -93,7 +94,6 @@ public class MyPageController {
 		int memberNo = loginMember.getMemberNo();
 		
 		int result = service.changePw(currentPw, newPw, memberNo);
-	
 		String path = null;
 		String message = null;
 		
@@ -106,6 +106,7 @@ public class MyPageController {
 		}
 		
 		ra.addFlashAttribute("message",message);
+
 		return path;
 	}
 	

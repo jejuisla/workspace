@@ -88,6 +88,7 @@ public class MemberController {
 		int result = service.signup(inputMember, memberAddress);
 		
 		// 회원가입 성공 시
+		
 		if(result > 0) {
 			ra.addFlashAttribute("message", "회원 가입 성공");
 			return "redirect:/";
@@ -118,6 +119,7 @@ public class MemberController {
 		// (기본값) request scope
 		// @SessionAttributes({"loginMember"}) -> session scope로 이동
 		model.addAttribute("loginMember", loginMember);
+	
 		return "redirect:/";
 	}
 }

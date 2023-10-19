@@ -12,6 +12,43 @@
       WHERE MEMBER_EMAIL = #{inputEmail}
    </select>
    
-
-
+   <!-- resultType은 DBConfig 에서 확인 가능 -->
+   <!-- resultType은 1행 결과를 저장할 타입 지정 -->
+   <select id="selectAll" resultType="Member">
+		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_DEL_FL
+		FROM "MEMBER"
+		ORDER BY MEMBER_NO DESC
+	</select>
+	
+	<!--
+		#{} : 출력 결과 양쪽에 ''(홑따옴표) 추가
+		${} : 출력 값 그대로 출력(홑따옴표 없음)
+	-->
+	
+	<!-- 전체 회원 조회(정렬) -->
+	<select id="selectSort" resultType="Member">
+		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_DEL_FL
+		FROM "MEMBER"
+		ORDER BY ${query}
+	</select>
+	
+	<!-- 회원 탈퇴 복구 -->
+	<update id="restoration">
+		UPDATE "MEMBER" SET
+		MEMBER_DEL_FL ='N'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="changeAuthority">
+		UPDATE "MEMBER" SET
+		AUTHORITY = DECODE(AUTHORITY,1,2,2,1)
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="initPw">
+		UPDATE "MEMBER" SET
+		MEMBER_PW = #{encPw}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 </mapper>
