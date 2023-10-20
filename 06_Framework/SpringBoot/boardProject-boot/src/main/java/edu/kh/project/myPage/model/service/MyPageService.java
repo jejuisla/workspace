@@ -29,4 +29,6 @@ public interface MyPageService {
 	 */
 	int secession(String memberPw, int memberNo);
 
+
+
 }

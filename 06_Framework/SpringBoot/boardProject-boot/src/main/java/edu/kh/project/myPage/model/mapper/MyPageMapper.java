@@ -27,4 +27,5 @@ public interface MyPageMapper {
 	 */
 	int secession(int memberNo);
 
+
 }

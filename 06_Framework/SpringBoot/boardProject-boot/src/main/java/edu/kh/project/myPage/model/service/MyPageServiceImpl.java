@@ -32,7 +32,10 @@ public class MyPageServiceImpl implements MyPageService{
 			updateMember.setMemberAddress(address);
 		}		
 		return mapper.info(updateMember);
+		
+
 	}
+	
 	
 	@Override
 	public int changePw(String currentPw, String newPw, int memberNo) {

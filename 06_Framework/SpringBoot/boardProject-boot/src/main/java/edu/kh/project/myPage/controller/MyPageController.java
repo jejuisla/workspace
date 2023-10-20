@@ -76,7 +76,6 @@ public class MyPageController {
 		// - message = "회원 정보 수정 실패"
 		
 		ra.addFlashAttribute("message",message);
-
 		return "redirect:info";
 	}
 	
@@ -104,7 +103,6 @@ public class MyPageController {
 			message = "비밀번호가 일치하지 않습니다.";
 			path = "redirect:changePw";
 		}
-		
 		ra.addFlashAttribute("message",message);
 
 		return path;
@@ -127,7 +125,7 @@ public class MyPageController {
 			message = "비밀번호가 일치하지 않습니다.";
 			path = "redirect:/secession";
 		}
-		
+	
 		ra.addFlashAttribute("message", message);
 		return path;
 	}

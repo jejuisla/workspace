@@ -53,6 +53,7 @@ public class MemberServiceImpl implements MemberService{
 		String encPw = bCrypt.encode(inputMember.getMemberPw()); // 암호화
 		inputMember.setMemberPw(encPw); // 암호화된 비밀번호 다시 set
 		
+//		inputMember.setMemberPw(bCrypt.encode(inputMember.getMemberPw()));
 		// Mapper 호출
 		return mapper.signup(inputMember);
 	}
