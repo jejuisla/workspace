@@ -43,4 +43,12 @@ public interface MemberMapper {
 	 * @return loginMember
 	 */
 	Member login(String memberEmail);
+
+	/** 이메일 중복 검사
+	 * @param email
+	 * @return
+	 */
+	int checkEmail(String email);
+
+	int checkNickname(String nickname);
 }

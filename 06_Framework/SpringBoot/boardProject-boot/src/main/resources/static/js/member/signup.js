@@ -64,16 +64,40 @@ memberEmail.addEventListener("input", () => {
 
   // 입력받은 이메일이 정규식과 일치하는 경우
   if (regEx.test(memberEmail.value)) {
-    emailMessage.innerText = "유효한 이메일 형식입니다.";
-    emailMessage.classList.add("confirm"); // 초록색 글씨
-    emailMessage.classList.remove("error"); // 빨간색 글씨 제거
-    checkObj.memberEmail = true; // 유효한 상태임을 기록
-  } // 입력받은 이메일이 정규식과 일치하지 않는 경우
-  else {
-    emailMessage.innerText = "알맞은 이메일 형식으로 작성해주세요.";
-    emailMessage.classList.add("error"); // 빨간색 글씨
-    emailMessage.classList.remove("confirm"); // 초록색 글씨 제거
-    checkObj.memberEmail = false; // 유효한 상태임을 기록
+    /* ******** 이메일 중복 검사(비동기) ******** */
+    fetch("/member/checkEmail?email=" + memberEmail.value)
+      .then((resp) => resp.text())
+      .then((result) => {
+        if (result == 0) {
+          // 중복 X
+          emailMessage.innerText = "사용 가능한 이메일 형식입니다.";
+          emailMessage.classList.add("confirm"); // 초록색 글씨
+          emailMessage.classList.remove("error"); // 빨간색 글씨 제거
+          checkObj.memberEmail = true; // 유효한 상태임을 기록
+        } else {
+          // 중복 O
+          emailMessage.innerText = "이미 사용중인 이메일입니다.";
+          emailMessage.classList.add("error");
+          emailMessage.classList.remove("confirm");
+          checkObj.memberEmail = false;
+        }
+      })
+
+      .catch((e) => {
+        console.log(e);
+      });
+    /* ****************************************** */
+
+    //   emailMessage.innerText = "유효한 이메일 형식입니다.";
+    //   emailMessage.classList.add("confirm"); // 초록색 글씨
+    //   emailMessage.classList.remove("error"); // 빨간색 글씨 제거
+    //   checkObj.memberEmail = true; // 유효한 상태임을 기록
+    // } // 입력받은 이메일이 정규식과 일치하지 않는 경우
+    // else {
+    //   emailMessage.innerText = "알맞은 이메일 형식으로 작성해주세요.";
+    //   emailMessage.classList.add("error"); // 빨간색 글씨
+    //   emailMessage.classList.remove("confirm"); // 초록색 글씨 제거
+    //   checkObj.memberEmail = false; // 유효한 상태임을 기록
   }
 });
 
@@ -211,15 +235,24 @@ memberNickname.addEventListener("input", () => {
   const regEx = /^[가-힣\w\d]{2,10}$/;
 
   if (regEx.test(memberNickname.value)) {
-    nickMessage.innerText = "유효한 닉네임 형식입니다.";
-    nickMessage.classList.add("confirm");
-    nickMessage.classList.remove("error");
-    checkObj.memberNickname = true;
-  } else {
-    nickMessage.innerText = "유효하지 않은 닉네임 형식입니다.";
-    nickMessage.classList.add("error");
-    nickMessage.classList.remove("confirm");
-    checkObj.memberNickname = false;
+    fetch("/member/checkNickname?nickname=" + memberNickname.value)
+      .then((resp) => resp.text())
+      .then((result) => {
+        if (result == 0) {
+          nickMessage.innerText = "사용가능한 닉네임 형식입니다.";
+          nickMessage.classList.add("confirm");
+          nickMessage.classList.remove("error");
+          checkObj.memberNickname = true;
+        } else {
+          nickMessage.innerText = "이미 사용중인 닉네임 형식입니다.";
+          nickMessage.classList.add("error");
+          nickMessage.classList.remove("confirm");
+          checkObj.memberNickname = false;
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 });
 
