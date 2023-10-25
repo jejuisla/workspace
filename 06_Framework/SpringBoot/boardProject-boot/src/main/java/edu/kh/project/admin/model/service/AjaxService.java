@@ -1,6 +1,7 @@
 package edu.kh.project.admin.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,22 @@ public interface AjaxService {
 	 * @return emailList
 	 */
 	List<String> selectEmailList(String keyword);
+
+	/** 모든 회원 정보 조회
+	 * @return memberList
+	 */
+	List<Member> selectAll();
+
+	/** 샘플 계정 가입
+	 * @param member
+	 * @return result
+	 */
+	int insertMember(Member member);
+
+	/** 탈퇴여부 변경
+	 * @param paramMap
+	 * @return result
+	 */
+	int updateFlag(Map<String, Object> paramMap);
 
 }
