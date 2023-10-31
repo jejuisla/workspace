@@ -63,34 +63,47 @@ public class AdminController {
 	 * @param model : 데이터 전달(request scope)
 	 * @return
 	 */
+//	@GetMapping("selectAll")
+//	public String selectAll(Model model) {
+//		
+//		// Collection : Java 자료구조(List, Set, Map)
+//		// List - 중복 허용(인덱스로 구분)
+//		// Set - 중복 안됨
+//		// Map - key, Value
+//		List<Member> memberList = service.selectAll();
+//		// Genenric - '타입 제한'특징 생김( < > )
+//		
+//		// 조회 결과를 request scope로 전달(addAttribute)
+//		model.addAttribute("memberList", memberList);
+//		return "admin/selectAll";
+//	}
 	@GetMapping("selectAll")
 	public String selectAll(Model model) {
 		
-		// Collection : Java 자료구조(List, Set, Map)
-		// List - 중복 허용(인덱스로 구분)
-		// Set - 중복 안됨
-		// Map - key, Value
 		List<Member> memberList = service.selectAll();
-		// Genenric - '타입 제한'특징 생김( < > )
-		
-		// 조회 결과를 request scope로 전달(addAttribute)
-		model.addAttribute("memberList", memberList);
-		return "admin/selectAll";
+		return null;
 	}
 	
 	/** 회원 전체 조회(정렬 추가)
 	 * @param model : 데이터 전달 객체
 	 * @return
 	 */
+//	@GetMapping("selectSort")
+//	public String selectSort(Model model,
+//			@RequestParam(value="sort", required = false, defaultValue = "1") int sort) {
+//		List<Member> memberList = service.selectSort(sort);
+//		
+//		model.addAttribute("memberList", memberList);
+//		
+//		return "admin/selectSort";
+//	}
 	@GetMapping("selectSort")
-	public String selectSort(Model model,
-			@RequestParam(value="sort", required = false, defaultValue = "1") int sort) {
+	public String selectSort(Model model, @RequestParam(value="sort", required=false, defaultValue = "1") int sort) {
 		List<Member> memberList = service.selectSort(sort);
 		
-		model.addAttribute("memberList", memberList);
-		
-		return "admin/selectSort";
+		return null;
 	}
+	
 	
 	/** 회원 복구
 	 * @param : memberNo : 회원번호
@@ -110,6 +123,9 @@ public class AdminController {
 		
 		return "redirect:selectMember?inputEmail=" + memberEmail;
 	}
+	
+	
+	
 	
 	@PostMapping("changeAuthority")
 	public String changeAuthority(int memberNo, String memberEmail, RedirectAttributes ra) {
@@ -143,6 +159,12 @@ public class AdminController {
 	public String ajaxTest() {
 		return "admin/ajaxTest";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

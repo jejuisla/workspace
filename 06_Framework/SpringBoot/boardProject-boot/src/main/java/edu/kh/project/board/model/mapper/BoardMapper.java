@@ -11,6 +11,8 @@ import edu.kh.project.board.model.dto.Board;
 @Mapper
 public interface BoardMapper {
 
+	int updateREadCount = 0;
+
 	/** 게시글 목록 조회
 	 * @param boardCode
 	 * @param rowBounds 
@@ -29,5 +31,31 @@ public interface BoardMapper {
 	 * @return
 	 */
 	Board boardDetail(Map<String, Object> map);
+
+	/** 게시글 좋아요 여부 확인
+	 * @param map
+	 * @return
+	 */
+	int likeCheck(Map<String, Object> map);
+
+	/** 좋아요 테이블에서 행 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	int deleteBoardLike(Map<String, Object> paramMap);
+
+	/** 좋아요 테이블에서 행 삽입
+	 * @param paramMap
+	 * @return result
+	 */
+	int insertBoardLike(Map<String, Object> paramMap);
+
+	/** 좋아요 수 조회
+	 * @param boardNo
+	 * @return count
+	 */
+	int countBoardLike(Integer boardNo);
+
+	int updateReadCount(int boardNo);
 
 }

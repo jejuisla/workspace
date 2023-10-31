@@ -107,5 +107,34 @@
       ORDER SIBLINGS BY COMMENT_NO
 	   
    </select>
+   
+   <select id="likeCheck" resultType="_int">
+	   SELECT COUNT(*) FROM BOARD_LIKE
+		   WHERE BOARD_NO = #{boardNo}
+		   AND MEMBER_NO = #{memberNo}
+   </select>
+   
+   <!-- 좋아요 테이블 행 삭제 -->
+   <delete id="deleteBoardLike">
+	   	DELETE FROM BOARD_LIKE
+		WHERE BOARD_NO = #{boardNo}
+		AND MEMBER_NO = #{memberNo}
+   </delete>
 	
+	<!-- 좋아요 테이블 행 삽입 -->
+	<insert id="insertBoardLike">
+		INSERT INTO BOARD_LIKE (MEMBER_NO, BOARD_NO)
+		VALUES(#{memberNo},#{boardNo})
+	</insert>
+	
+	<select id="countBoardLike" resultType="_int">
+		SELECT COUNT(*) FROM BOARD_LIKE
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<update id="updateReadCount">
+		UPDATE BOARD SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 </mapper>

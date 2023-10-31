@@ -28,11 +28,15 @@ public class AdminServiceImpl implements AdminService{
 		return mapper.select(inputEmail);
 	}
 	
+//	@Override
+//	public List<Member> selectAll() {
+//		return mapper.selectAll();
+//	}
+
 	@Override
 	public List<Member> selectAll() {
 		return mapper.selectAll();
 	}
-
 	@Override
 	public List<Member> selectSort(int sort) {
 	
@@ -49,10 +53,19 @@ public class AdminServiceImpl implements AdminService{
 		return mapper.selectSort(query);
 	}
 	
+
+	
+	
+	
+//	@Override
+//	public int restoration(int memberNo) {
+//		return mapper.restoration(memberNo);
+//	}
 	@Override
 	public int restoration(int memberNo) {
 		return mapper.restoration(memberNo);
 	}
+	
 	
 	@Override
 	public int changeAuthority(int memberNo) {
