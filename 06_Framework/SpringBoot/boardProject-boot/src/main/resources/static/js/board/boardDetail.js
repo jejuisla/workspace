@@ -118,3 +118,14 @@ if (deleteBtn != null) {
     }
   });
 }
+
+/* 수정 버튼 클릭 시 수정 화면 요청 */
+const updateBtn = document.querySelector("#updateBtn");
+
+if (updateBtn != null) {
+  updateBtn.addEventListener("click", () => {
+    let url = `/editBoard/${boardCode}/${boardNo}/update${location.search}`;
+
+    location.href = url;
+  });
+}
