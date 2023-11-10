@@ -100,7 +100,7 @@ for (let i = 0; i < inputImageList.length; i++) {
 
 // ----------------------------------------------------------------------
 /* 제출 시 유효성 검사 */
-const boardWriteFrm = document.querySelector(".boardWriteFrm");
+const boardWriteFrm = document.querySelector("#boardWriteFrm");
 
 boardWriteFrm.addEventListener("submit", (e) => {
   const title = document.querySelector("[name=boardTitle]");
