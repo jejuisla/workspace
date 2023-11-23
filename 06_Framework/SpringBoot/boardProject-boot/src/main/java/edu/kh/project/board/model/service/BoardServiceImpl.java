@@ -125,4 +125,13 @@ public class BoardServiceImpl implements BoardService{
 	public int updateReadCount(int boardNo) {
 		return mapper.updateReadCount(boardNo);
 	}
+	
+	
+	@Override
+	public List<String> selectDbImageList() {
+		return mapper.selectDbImageList();
+	}
+	
+	
+	
 }
