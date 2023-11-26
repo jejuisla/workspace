@@ -39,4 +39,17 @@ public class OrderServlet extends HttpServlet{
 		if(total ==0) resp.sendRedirect("/error");
 
 	}
+	
+	public class Library{
+		private Book book;
+		public Library() {
+			this.book = new Book();
+		}
+	}
+	public class Book{
+		private String title;
+		private String author;
+	}
+	
+	
 }
