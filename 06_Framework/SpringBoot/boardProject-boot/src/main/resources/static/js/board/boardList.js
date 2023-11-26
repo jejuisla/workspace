@@ -17,7 +17,7 @@ const options = document.querySelectorAll("#searchKey > option");
 const searchQuery = document.querySelector("#searchQuery");
 
 // 즉시 실행 함수 (해석되자 마자 실행되는 함수, 속도 빠름)
-(() => {
+() => {
   // 주소에 있는 파라미터(쿼리스트링)를 얻어오기
   const params = new URL(location.href).searchParams;
   const key = params.get("key"); // t,c,tc,w
@@ -35,4 +35,4 @@ const searchQuery = document.querySelector("#searchQuery");
       }
     }
   }
-})();
+};
