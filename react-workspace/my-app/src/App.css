@@ -1,0 +1,13 @@
+.info {
+  width: 250px;
+  border: 2px solid black;
+}
+
+.completed {
+  /* 중간선 */
+  text-decoration: line-through;
+}
+
+.color-red {
+  color: red;
+}
