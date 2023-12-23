@@ -51,7 +51,7 @@ function App() {
       <State2 init={10} />
       <hr />
       <State3 /> */}
-      <TodoList />
+      {/* <TodoList /> */}
 
       {/* <Context1 /> */}
       {/* <Context2 /> */}
